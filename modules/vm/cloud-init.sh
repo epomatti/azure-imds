@@ -7,5 +7,7 @@ export NEEDRESTART_MODE=a
 apt update
 apt upgrade -y
 
+apt-get install jq -y
+
 
 reboot
