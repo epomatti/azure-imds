@@ -1,6 +1,6 @@
 # Azure IMDS
 
-Exercise on the [Instance Metadata Service (IMDS)][1].
+Using the [Instance Metadata Service (IMDS)][1] access tokens on Azure.
 
 Set up the `.auto.tfvars` config:
 
