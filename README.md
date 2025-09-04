@@ -95,9 +95,6 @@ Check the container:
 curl localhost:8080
 ```
 
-
-
-
 [1]: https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=linux
 [2]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-use-vm-token
 [3]: https://learn.microsoft.com/en-us/rest/api/storageservices/authorize-with-azure-active-directory

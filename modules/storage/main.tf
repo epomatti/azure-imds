@@ -31,3 +31,9 @@ resource "azurerm_role_assignment" "default" {
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = var.vm_principal_id
 }
+
+resource "azurerm_role_assignment" "current" {
+  scope                = azurerm_storage_account.default.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = data.azuread_client_config.current.object_id
+}
