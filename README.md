@@ -86,13 +86,20 @@ Pull and start the container
 
 ```sh
 sudo docker pull acrimds.azurecr.io/app:latest
-sudo docker run -d -p 8080:8080 acrimds.azurecr.io/app:latest
+sudo docker run -d -p 8080:8080 --env-file .env acrimds.azurecr.io/app:latest 
 ```
 
 Check the container:
 
 ```sh
 curl localhost:8080
+```
+
+Test the SDK authentication:
+
+```sh
+curl localhost:8080/storagedefault
+curl localhost:8080/storagemanaged
 ```
 
 [1]: https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=linux

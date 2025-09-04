@@ -40,10 +40,11 @@ def get_from_storage_managed():
     Returns a simple greeting.
     """
     credential = ManagedIdentityCredential()
-    # Authenticate with a system-assigned managed identity
     client = BlobServiceClient(account_url, credential=credential)
-    client.list_containers()
-    return 'Hello World!'
+    container_client = client.get_container_client(container=container_name)
+    blob_paged_items = container_client.list_blob_names()
+    blob_list = list(blob_paged_items)
+    return blob_list[0] if blob_list else 'No blobs found'
 
 if __name__ == '__main__':
     app.run('0.0.0.0', '8080')
