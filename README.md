@@ -66,6 +66,36 @@ If having issues with the token audience, check the token here https://jwt.ms/.
 
 ## Docker
 
+Build and push the image:
+
+```sh
+cd app
+docker build -t azureimds .
+bash acrpush.sh
+```
+
+Log in with the VM identity:
+
+```sh
+# Must use sudo to login
+sudo az login --identity
+sudo az acr login --name acrimds
+```
+
+Pull and start the container
+
+```sh
+sudo docker pull acrimds.azurecr.io/app:latest
+sudo docker run -d -p 8080:8080 acrimds.azurecr.io/app:latest
+```
+
+Check the container:
+
+```sh
+curl localhost:8080
+```
+
+
 
 
 [1]: https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=linux

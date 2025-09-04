@@ -46,3 +46,11 @@ module "storage" {
 
   vm_principal_id = module.vm.principal_id
 }
+
+module "acr" {
+  source              = "./modules/acr"
+  workload            = local.workload
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  vm_principal_id     = module.vm.principal_id
+}

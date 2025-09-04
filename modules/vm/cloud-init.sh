@@ -8,6 +8,11 @@ apt upgrade -y
 
 apt-get install -y jq
 
+
+### Azure CLI ###
+curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+  
 ### Docker ###
 apt-get install -y ca-certificates curl
 install -m 0755 -d /etc/apt/keyrings
