@@ -2,10 +2,18 @@
 
 Using the [Instance Metadata Service (IMDS)][1] access tokens on Azure.
 
+## Deploy
+
 Set up the `.auto.tfvars` config:
 
 ```sh
 cp config/template.tfvars .auto.tfvars
+```
+
+Generate the virtual machine key:
+
+```sh
+ssh-keygen -f .keys/azure
 ```
 
 Create the infrastructure:
@@ -15,9 +23,21 @@ terraform init
 terraform apply -auto-approve
 ```
 
+Connect to the instance:
+
+```sh
+ssh -i .keys/azure azureuser@<ipaddress>
+```
+
+Check cloud init:
+
+```sh
+cloud-init status --wait
+```
+
 The VM will have a System-Assigned Managed Identity created, and permissions are set up to the storage.
 
-To use IMDS, log into the VM via SSH and interact with it.
+## Using IMDS
 
 > 💡 Check the [documentation][1] for all endpoints and options.
 
@@ -43,6 +63,10 @@ curl -X GET -H 'Authorization: Bearer <access_token>' \
 ```
 
 If having issues with the token audience, check the token here https://jwt.ms/.
+
+## Docker
+
+
 
 [1]: https://learn.microsoft.com/en-us/azure/virtual-machines/instance-metadata-service?tabs=linux
 [2]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-use-vm-token

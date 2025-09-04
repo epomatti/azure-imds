@@ -23,7 +23,7 @@ resource "azurerm_network_interface" "default" {
 }
 
 locals {
-  username = "sysadmin"
+  username = "azureuser"
 }
 
 resource "azurerm_linux_virtual_machine" "default" {
@@ -32,8 +32,13 @@ resource "azurerm_linux_virtual_machine" "default" {
   location              = var.location
   size                  = var.size
   admin_username        = local.username
-  admin_password        = "P@ssw0rd.123"
   network_interface_ids = [azurerm_network_interface.default.id]
+
+  vtpm_enabled        = var.vtpm_enabled
+  secure_boot_enabled = var.secure_boot_enabled
+
+  patch_mode                                             = "AutomaticByPlatform"
+  bypass_platform_safety_checks_on_user_schedule_enabled = true
 
   custom_data = filebase64("${path.module}/cloud-init.sh")
 
@@ -43,7 +48,7 @@ resource "azurerm_linux_virtual_machine" "default" {
 
   admin_ssh_key {
     username   = local.username
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = file(var.public_key_path)
   }
 
   os_disk {
@@ -53,9 +58,9 @@ resource "azurerm_linux_virtual_machine" "default" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts-arm64"
-    version   = "latest"
+    publisher = var.image_publisher
+    offer     = var.image_offer
+    sku       = var.image_sku
+    version   = var.image_version
   }
 }
