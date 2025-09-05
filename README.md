@@ -39,7 +39,8 @@ The VM will have a System-Assigned Managed Identity created, and permissions are
 
 ## Using IMDS
 
-> 💡 Check the [documentation][1] for all endpoints and options.
+> [!TIP]
+> Check the [documentation][1] for all endpoints and options.
 
 ```sh
 curl -s -H Metadata:true --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2023-07-01" | jq
