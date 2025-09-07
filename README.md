@@ -83,6 +83,13 @@ sudo az login --identity
 sudo az acr login --name acrimds
 ```
 
+Create the `.env` file with the integration variables:
+
+```sh
+STORAGE_PRIMARY_ENDPOINT="<URL>"
+STORAGE_CONTAINER_NAME=content
+```
+
 Pull and start the container
 
 ```sh
